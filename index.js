@@ -4,6 +4,7 @@ const validateLineup = (lineup) => {
   if (lineup.reduce(countOF, 0) !== 3) { return false }
   if (lineup.reduce(teamIDCount, []).filter(num => num > 2).length > 0) { return false }
   if (lineup.reduce(gameIDCount, []).filter(num => num > 3).length > 0) { return false }
+  if (lineup.reduce(salaryTotal, 0) > 45000) { return false }
 
   return true
 }
@@ -30,6 +31,10 @@ const teamIDCount = (acc, player) => {
 
 const gameIDCount = (acc, player) => {
   return acc[player.gameId] ? ++acc[player.gameId] : acc[player.gameId] = 1, acc
+}
+
+const salaryTotal = (acc, player) => {
+  return acc + player.salary
 }
 
 module.exports = validateLineup
