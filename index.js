@@ -5,6 +5,9 @@ const validateLineup = (lineup) => {
   if (lineup.reduce((acc, curr) => {
     return acc[curr.teamId] ? ++acc[curr.teamId] : acc[curr.teamId] = 1, acc
   }, []).filter(num => num > 2).length > 0) { return false }
+  if (lineup.reduce((acc, curr) => {
+    return acc[curr.gameId] ? ++acc[curr.gameId] : acc[curr.gameId] = 1, acc
+  }, []).filter(num => num > 3).length > 0) { return false }
 
   return true
 }
