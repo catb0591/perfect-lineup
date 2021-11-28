@@ -1,10 +1,10 @@
 const validateLineup = (lineup) => {
-  if (lineup.length !== 9) { return false }
-  if (lineup.map(playerPosition).filter(truthyValue => truthyValue === false).length !== 0) { return false }
-  if (lineup.reduce(countOF, 0) !== 3) { return false }
-  if (lineup.reduce(teamIDCount, []).filter(count => count > 2).length > 0) { return false }
-  if (lineup.reduce(gameIDCount, []).filter(count => count > 3).length > 0) { return false }
-  if (lineup.reduce(salaryTotal, 0) > 45000) { return false }
+  if (lineup.length !== 9 ||
+  lineup.map(playerPosition).filter(truthyValue => truthyValue === false).length !== 0 ||
+  lineup.reduce(countOF, 0) !== 3 ||
+  lineup.reduce(teamIDCount, []).filter(count => count > 2).length > 0 ||
+  lineup.reduce(gameIDCount, []).filter(count => count > 3).length > 0 ||
+  lineup.reduce(salaryTotal, 0) > 45000) { return false }
 
   return true
 }
@@ -12,8 +12,7 @@ const validateLineup = (lineup) => {
 const positionOptions = []
 
 const playerPosition = (player) => {
-  if (player.position === 'OF') { return true }
-  if (positionOptions.indexOf(player.position) < 0) {
+  if (player.position === 'OF' || positionOptions.indexOf(player.position) < 0) {
     positionOptions.push(player.position)
 
     return true
